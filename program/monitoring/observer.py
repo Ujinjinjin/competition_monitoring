@@ -38,8 +38,9 @@ class Observer:
             saved_data: List[Student] = StudentSerializer.deserialize_many(json.load(file))
             await self._logger.log_async(f'Data loaded from file {settings.data_file}')
 
+        print()
         for student in observable_students:
-            print(f'{student.name}{(70 - len(student.name))*" "}{student.position}/92')
+            print(f'{10*" "}{student.name}{(40 - len(student.name))*" "}{student.position}/92')
         print()
 
         # Compare positions
@@ -61,6 +62,7 @@ class Observer:
             message: str = f'Attention! {student_name} has lost competition.'
         else:
             playsound(settings.alert_changed_position)
-            message: str = f'{student_name} has moved from {old_position} position to {new_position}.'
+            message: str = f'{student_name}{(30-len(student_name))*" "} ' \
+                f'has moved from position {old_position} to {new_position}. '
         await self._logger.log_async(message, LogLevel.Warning)
         print(message)

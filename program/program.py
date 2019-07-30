@@ -34,9 +34,9 @@ class Program:
     async def _start(self):
         """Main logic"""
         print('Starting to clean processes...')
-        try:
-            await self._logger.log_async('Program started')
-            while True:
+        await self._logger.log_async('Program started')
+        while True:
+            try:
                 await self.observer.observe(settings.students)
                 if datetime.utcnow() < settings.end_date:
                     await self._logger.log_async(f'Sleeping for {settings.sleep_time}...')
@@ -45,8 +45,8 @@ class Program:
                     await self._logger.log_async('Finished observing')
                     print('Finished observing')
                     break
-        except Exception as ex:
-            await self._logger.log_async(str(ex), LogLevel.Error)
+            except Exception as ex:
+                await self._logger.log_async(str(ex), LogLevel.Error)
 
     def _get_utils(self) -> BaseUtils:
         """Get utils class depending on what system it's running"""
