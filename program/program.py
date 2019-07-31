@@ -38,6 +38,11 @@ class Program:
         while True:
             try:
                 await self.observer.observe(settings.students)
+                print(f'\n\n\nFetched data at: {datetime.now()}\n')
+            except Exception as ex:
+                print(f'Failed at:       {datetime.now()}', end='\r')
+                await self._logger.log_async(str(ex), LogLevel.Error)
+            finally:
                 if datetime.utcnow() < settings.end_date:
                     await self._logger.log_async(f'Sleeping for {settings.sleep_time}...')
                     time.sleep(settings.sleep_time)
@@ -45,8 +50,6 @@ class Program:
                     await self._logger.log_async('Finished observing')
                     print('Finished observing')
                     break
-            except Exception as ex:
-                await self._logger.log_async(str(ex), LogLevel.Error)
 
     def _get_utils(self) -> BaseUtils:
         """Get utils class depending on what system it's running"""

@@ -22,11 +22,12 @@ class Observer:
 
     async def observe(self, student_names: List[str]):
         """Observe current monitoring"""
-        os.system('cls')
 
         await self._logger.log_async(f'Started observing following students: {student_names}')
         all_students: List[Student] = await self._parser.parse()
         observable_students: List[Student] = list()
+
+        os.system('cls')
 
         # Get observable students
         for student in all_students:

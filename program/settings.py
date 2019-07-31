@@ -27,5 +27,5 @@ students: List[str] = [
     'Тертищенко Виктория Юрьевна'
 ]
 
-sleep_time: int = 300000
+sleep_time: int = 600
 end_date: datetime = datetime(2019, 8, 8, 23, 59, 59)
