@@ -18,6 +18,7 @@ log_file: str = 'storage/log'
 data_file: str = 'storage/data.json'
 alert_lost: str = 'storage/alert_lost.wav'
 alert_changed_position: str = 'storage/alert_changed_position.wav'
+alert_moved_up: str = 'storage/moved_up.wav'
 
 students: List[str] = [
     'Галладжов Камиль Амруллаевич',

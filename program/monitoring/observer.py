@@ -57,13 +57,15 @@ class Observer:
 
     async def notify(self, student_name: str, old_position: int, new_position: int, total_positions: int):
         """Notify observer of changes"""
-
         if new_position > total_positions > old_position:
-            playsound(settings.alert_lost)
             message: str = f'Attention! {student_name} has lost competition.'
+            playsound(settings.alert_lost)
         else:
-            playsound(settings.alert_changed_position)
-            message: str = f'{student_name}{(30-len(student_name))*" "} ' \
-                f'has moved from position {old_position} to {new_position}. '
+            message: str = f'{student_name}{(30 - len(student_name)) * " "} ' \
+                           f'has moved from position {old_position} to {new_position}. '
+            if new_position > old_position:
+                playsound(settings.alert_changed_position)
+            else:
+                playsound(settings.alert_moved_up)
         await self._logger.log_async(message, LogLevel.Warning)
         print(message)
